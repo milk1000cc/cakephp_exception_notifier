@@ -62,6 +62,12 @@ class ExceptionNotifierComponent extends Object
     {
         if (Configure::read('debug') > 0) return;
 
+        // error_reporting(E_ALL) and don't display errors
+        if (Configure::read('debug') == 0) {
+            error_reporting(E_ALL);
+            ini_set('display_errors', 0);
+        }
+
         register_shutdown_function(array($this, 'handleShutdown'));
         set_exception_handler(array($this, 'handleException'));
 
