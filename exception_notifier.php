@@ -43,7 +43,7 @@ class ExceptionNotifierComponent extends Object
 
         $mail = new Qdmail();
         $mail->to($this->exceptionRecipients);
-        $mail->subject('[' . $this->_getSeverityAsString() . '] ' . $this->_exception->getMessage());
+        $mail->subject('['. date('Ymd H:i:s') . '][' . $this->_getSeverityAsString() . '][' . $this->_getUrl() . '] ' . $this->_exception->getMessage());
         $mail->text($this->_getText());
         $mail->from(array('exception.notifier@default.com', 'Exception Notifier'));
         $mail->send();
