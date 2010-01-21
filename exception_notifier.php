@@ -10,7 +10,7 @@ class ExceptionNotifierComponent extends Object
                              E_STRICT => 'STRICT'
                              );
 
-    // Mail settings
+    // Mail configuration
     public $useSmtp = false;
     public $smtpParams = array(
                                'host'=>'smtp.default.com',
@@ -21,7 +21,7 @@ class ExceptionNotifierComponent extends Object
     public $exceptionFrom = array('exception.notifier@default.com', 'Exception Notifier');// exception mail from
     public $exceptionRecipients = array();// exception mail to
 
-    // Exception error settings
+    // Exception error configuration
     public $observeNotice = true;
     public $observeWarning = true;
     public $observeStrict = false;

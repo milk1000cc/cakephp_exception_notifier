@@ -27,6 +27,8 @@ And that's all! This component is only run when DEBUG configuraton value is 0.
 
 h2. Configuration
 
+h3. Exception error configuration
+
 In default configuration, this component observes exception, notice error, warning error, and fatal error.
 If you don't want to observe notice error and warning error, add the following code.
 
@@ -60,6 +62,31 @@ class AppController extends Controller
     }
 }
 </pre>
+
+h3. Mail configuration
+
+If you use SMTP protocol when this component send exception mail, add the following code.
+
+<pre>
+class AppController extends Controller
+{
+    public $components = array('ExceptionNotifier');
+
+    public function beforeFilter()
+    {
+        $this->ExceptionNotifier->exceptionRecipients = array('abc@example.com');
+        $this->ExceptionNotifier->useSmtp = true; // use SMTP
+        $this->smtpParams = array(
+                                  'host'=>'smtp.example.com',
+                                  'port'=>'25',
+                                  'from'=>'abc@example.com',
+                                  'protocol'=>'SMTP',
+                               );
+        $this->ExceptionNotifier->observe();
+    }
+}
+</pre>
+
 
 h2. Copyright
 
