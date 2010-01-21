@@ -76,7 +76,7 @@ class AppController extends Controller
     {
         $this->ExceptionNotifier->exceptionRecipients = array('abc@example.com');
         $this->ExceptionNotifier->useSmtp = true; // use SMTP
-        $this->smtpParams = array(
+        $this->ExceptionNotifier->smtpParams = array(
                                   'host'=>'smtp.example.com',
                                   'port'=>'25',
                                   'from'=>'abc@example.com',
