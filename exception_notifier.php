@@ -10,7 +10,18 @@ class ExceptionNotifierComponent extends Object
                              E_STRICT => 'STRICT'
                              );
 
-    public $exceptionRecipients = array();
+    // Mail settings
+    public $useSmtp = false;
+    public $smtpParams = array(
+                               'host'=>'smtp.default.com',
+                               'port'=>'25',
+                               'from'=>'exception.notifier@default.com',
+                               'protocol'=>'SMTP',
+                               );
+    public $exceptionFrom = array('exception.notifier@default.com', 'Exception Notifier');// exception mail from
+    public $exceptionRecipients = array();// exception mail to
+
+    // Exception error settings
     public $observeNotice = true;
     public $observeWarning = true;
     public $observeStrict = false;
@@ -41,11 +52,14 @@ class ExceptionNotifierComponent extends Object
     {
         $this->_exception = $e;
 
+        $mail->smtp($this->useSmtp);
+        $mail->smtpServer($this->smtpParams);
+
         $mail = new Qdmail();
         $mail->to($this->exceptionRecipients);
         $mail->subject('['. date('Ymd H:i:s') . '][' . $this->_getSeverityAsString() . '][' . $this->_getUrl() . '] ' . $this->_exception->getMessage());
         $mail->text($this->_getText());
-        $mail->from(array('exception.notifier@default.com', 'Exception Notifier'));
+        $mail->from($this->exceptionFrom);
         $mail->send();
     }
 
