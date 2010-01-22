@@ -26,6 +26,9 @@ class ExceptionNotifierComponent extends Object
     public $observeWarning = true;
     public $observeStrict = false;
 
+    // Observe debug level
+    public $allowObserve = 0;
+
     private $_controller;
     private $_exception;
 
@@ -74,7 +77,7 @@ class ExceptionNotifierComponent extends Object
 
     public function observe()
     {
-        if (Configure::read('debug') > 0) return;
+        if (Configure::read('debug') > $this->allowObserve) return;
 
         // error_reporting(E_ALL) and don't display errors
         if (Configure::read('debug') == 0) {
