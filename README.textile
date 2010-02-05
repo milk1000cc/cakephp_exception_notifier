@@ -23,7 +23,13 @@ class AppController extends Controller
 }
 </pre>
 
-And that's all! This component is only run when DEBUG configuraton value is 0.
+And that's all!
+
+This component is only run when DEBUG configuraton value is 0. If you want to run this component when configuration value is more than 0, pass true to observe method.
+
+<pre>
+$this->ExceptionNotifier->observe(true);
+</pre>
 
 h2. Configuration
 

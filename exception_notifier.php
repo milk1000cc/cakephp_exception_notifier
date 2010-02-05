@@ -73,9 +73,9 @@ class ExceptionNotifierComponent extends Object
         return false;
     }
 
-    public function observe()
+    public function observe($force = false)
     {
-        if (Configure::read('debug') > 0) return;
+        if (!$force && Configure::read('debug') > 0) return;
 
         // error_reporting(E_ALL) and don't display errors
         if (Configure::read('debug') == 0) {
