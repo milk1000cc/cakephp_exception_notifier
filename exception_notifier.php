@@ -96,6 +96,9 @@ class ExceptionNotifierComponent extends Object
     private function _getText()
     {
         $e = $this->_exception;
+        $params = method_exists($this->_controller, 'params') ? $this->_controller->params : array();
+        $session = isset($_SESSION) ? $_SESSION : array();
+
         $msg = array(
                      $e->getMessage(),
                      $e->getFile() . '(' . $e->getLine() . ')',
@@ -106,7 +109,7 @@ class ExceptionNotifierComponent extends Object
                      '',
                      '* URL       : ' . $this->_getUrl(),
                      '* IP address: ' . env('REMOTE_ADDR'),
-                     '* Parameters: ' . trim(print_r($this->_controller->params, true)),
+                     '* Parameters: ' . trim(print_r($params, true)),
                      '* Cake root : ' . APP,
                      '',
                      '-------------------------------',
@@ -119,7 +122,7 @@ class ExceptionNotifierComponent extends Object
                      'Session:',
                      '-------------------------------',
                      '',
-                     trim(print_r($_SESSION, true)),
+                     trim(print_r($session, true)),
                      '',
                      '-------------------------------',
                      'Cookie:',
