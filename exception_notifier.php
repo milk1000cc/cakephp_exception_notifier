@@ -20,6 +20,7 @@ class ExceptionNotifierComponent extends Object
                                );
     public $exceptionFrom = array('exception.notifier@default.com', 'Exception Notifier');// exception mail from
     public $exceptionRecipients = array();// exception mail to
+    public $subjectPrefix = '';
 
     // Exception error configuration
     public $observeNotice = true;
@@ -58,7 +59,7 @@ class ExceptionNotifierComponent extends Object
         $mail->smtpServer($this->smtpParams);
 
         $mail->to($this->exceptionRecipients);
-        $mail->subject('['. date('Ymd H:i:s') . '][' . $this->_getSeverityAsString() . '][' . $this->_getUrl() . '] ' . $this->_exception->getMessage());
+        $mail->subject($this->subjectPrefix . '['. date('Ymd H:i:s') . '][' . $this->_getSeverityAsString() . '][' . $this->_getUrl() . '] ' . $this->_exception->getMessage());
         $mail->text($this->_getText());
         $mail->from($this->exceptionFrom);
         $mail->send();
